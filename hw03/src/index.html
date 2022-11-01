@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=1900" />
+  <title>Computer Animation HW</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+
+    h4,
+    span {
+      font-size: 10px !important;
+    }
+
+    .Sliders {
+      position: absolute !important;
+      top: 20px;
+      left: 150px;
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    .parameter {
+      align-items: center;
+      position: absolute !important;
+      height: 300px;
+      width: 350px;
+      top: 20px;
+      right: 150px;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 1;
+    }
+  </style>
+  <!-- Pollyfill script -->
+  <script src="https://unpkg.com/core-js-bundle@3.6.1/minified.js"></script>
+  <!-- Live2DCubismCore script -->
+  <script src="./Core/live2dcubismcore.js"></script>
+  <!-- Build script -->
+  <script src="./dist/bundle.js"></script>
+</head>
+
+<body>
+  <div class="Sliders">
+    <div class="col">
+      <div id="div ParamAngleX" style="border-width:1px; border-style:solid;">
+        <h4>ParamAngleX</h4>
+        <span>-30</span>
+        <input id="ParamAngleX" type="range" step="0.1" min="-30" max="30" value="0">
+        <span>30</span>
+      </div>
+
+      <div id="div ParamAngleY" style="border-width:1px; border-style:solid;">
+        <h4>ParamAngleY</h4>
+        <span>-30</span>
+        <input id="ParamAngleY" type="range" step="0.1" min="-30" max="30" value="0">
+        <span>30</span>
+      </div>
+
+      <div id="div ParamAngleZ" style="border-width:1px; border-style:solid;">
+        <h4>ParamAngleZ</h4>
+        <span>-30</span>
+        <input id="ParamAngleZ" type="range" step="0.1" min="-30" max="30" value="0">
+        <span>30</span>
+      </div>
+
+      <div id="div ParamBrowLY" style="border-width:1px; border-style:solid;">
+        <h4>ParamBrowLY</h4>
+        <span>-1</span>
+        <input id="ParamBrowLY" type="range" step="0.1" min="-1" max="1" value="0">
+        <span>1</span>
+      </div>
+
+      <div id="div ParamBrowRY" style="border-width:1px; border-style:solid;">
+        <h4>ParamBrowRY</h4>
+        <span>-1</span>
+        <input id="ParamBrowRY" type="range" step="0.1" min="-1" max="1" value="0">
+        <span>1</span>
+      </div>
+
+      <div id="div ParamBrowLX" style="border-width:1px; border-style:solid;">
+        <h4>ParamBrowLX</h4>
+        <span>-1</span>
+        <input id="ParamBrowLX" type="range" step="0.1" min="-1" max="1" value="0">
+        <span>1</span>
+      </div>
+
+      <div id="div ParamBrowRX" style="border-width:1px; border-style:solid;">
+        <h4>ParamBrowRX</h4>
+        <span>-1</span>
+        <input id="ParamBrowRX" type="range" step="0.1" min="-1" max="1" value="0">
+        <span>1</span>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="parameter">
+    <article>
+      <h1>標準參數</h1>
+      <p id="standard_name"></p>
+      <output id="standard_output"></output>
+      <input type="range" id="standard_input" onchange="updataStandardValue()" />
+      <select id="standard_select" onchange="changeStandard()">
+        <option value="">請選擇標準參數</option>
+        <option value="angleX">ParamAngleX</option>
+        <option value="angleY">ParamAngleY</option>
+        <option value="angleZ">ParamAngleZ</option>
+        <option value="eyeLOpen">ParamEyeLOpen</option>
+        <option value="eyeLSmile">ParamEyeLSmile</option>
+        <option value="eyeROpen">ParamEyeROpen</option>
+        <option value="eyeRSmile">ParamEyeRSmile</option>
+        <option value="eyeBallX">ParamEyeBallX</option>
+        <option value="eyeBallY">ParamEyeBallY</option>
+        <option value="eyeBallForm">ParamEyeBallForm</option>
+        <option value="browLY">ParamBrowLY</option>
+        <option value="browRY">ParamBrowRY</option>
+        <option value="browLX">ParamBrowLX</option>
+        <option value="browRX">ParamBrowRX</option>
+        <option value="browLAngle">ParamBrowLAngle</option>
+        <option value="browRAngle">ParamBrowRAngle</option>
+        <option value="browLForm">ParamBrowLForm</option>
+        <option value="browRForm">ParamBrowRForm</option>
+        <option value="bodyAngleX">ParamBodyAngleX</option>
+        <option value="bodyAngleY">ParamBodyAngleY</option>
+        <option value="bodyAngleZ">ParamBodyAngleZ</option>
+        <option value="breath">ParamBreath</option>
+        <option value="armLA">ParamArmLA</option>
+        <option value="armRA">ParamArmRA</option>
+        <option value="armLB">ParamArmLB</option>
+        <option value="armRB">ParamArmRB</option>
+      </select>
+    </article>
+    <article>
+      <h1>特定參數</h1>
+      <p id="special_name"></p>
+      <output id="special_output"></output>
+      <input type="range" id="special_input" onchange="updataSpecialValue()" />
+      <select id="special_select" onchange="changeSpecial()">
+        <option value="">請選擇特定參數</option>
+        <option value="tere">ParamTere</option>
+        <option value="faceForm">ParamFaceForm</option>
+        <option value="eyeForm">ParamEyeForm</option>
+        <option value="tear">ParamTear</option>
+        <option value="mouthForm">ParamMouthForm</option>
+        <option value="mouthOpenY">ParamMouthOpenY</option>
+        <option value="scarf">ParamScarf</option>
+        <option value="bodyUpper">ParamBodyUpper</option>
+        <option value="bustY">ParamBustY</option>
+        <option value="handChangeR">ParamHandChangeR</option>
+        <option value="handAngleR">ParamHandAngleR</option>
+        <option value="handDhangeL">ParamHandDhangeL</option>
+        <option value="handAngleL">ParamHandAngleL</option>
+        <option value="hairFront">ParamHairFront</option>
+        <option value="hairSide">ParamHairSide</option>
+        <option value="hairBack">ParamHairBack</option>
+      </select>
+    </article>
+  </div>
+  <script src="./main.js"></script>
+</body>
+
+</html>
